@@ -1,0 +1,22 @@
+{
+  "name": "optimization-final-project",
+  "version": "1.0.0",
+  "description": "Udacity optimization project",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dooster/performant-portfolios.git"
+  },
+  "author": "Jeremy Bender",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dooster/performant-portfolios/issues"
+  },
+  "homepage": "https://github.com/dooster/performant-portfolios#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
