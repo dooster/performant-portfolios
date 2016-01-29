@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dooster/performant-portfolios#readme",
   "devDependencies": {
+    "critical": "^0.7.0",
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-cache": "^0.4.1",
