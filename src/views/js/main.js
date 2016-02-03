@@ -444,8 +444,9 @@ var resizePizzas = function(size) {
 
     //and a loop iterates through every .randomPizzaContainer
     //applying the new width property
-    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
-    for (var i = 0; i < randomPizzas.length; i++) {
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+    var randomPizzasLength = randomPizzas.length;
+    for (var i = 0; i < randomPizzasLength; i++) {
       randomPizzas[i].style.width = newsize;
     }
   }
@@ -463,8 +464,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -498,7 +500,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   var top = document.body.scrollTop;
   var items = document.querySelectorAll('.mover');
-
+  var itemLength = items.length;
 //added a variable top outside the loop
 //now the loop does not need to access the document.body's scrollTop attribute
 //on each item as it iterates through
@@ -506,7 +508,7 @@ function updatePositions() {
 //the for loop counts two variables
 //i refers to each individual moving pizza item
 //and n runs on a shorter loop to provide the phase function with its modulo value
-  for (n = 0, i = 0; n < 5, i < items.length; n++, i++) {
+  for (n = 0, i = 0; n < 5, i < itemLength; n++, i++) {
     var phase = Math.sin((top / 1250) + (n % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
@@ -526,18 +528,24 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+//All elements that can be taken out of the for loop, such as elem and the movingPizzas query
+//were taken out of the for loop to speed the function
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
+  var rows = Math.round(window.innerHeight / 100); //Rows is calculated by dividing the screen's height by the pizza's height and then rounded to a full integer
+  var pizzaNumber = rows * cols; //The number of pizzas to create is then created based on the number of Pizza rows and columns
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+  var elem;
+  var movingPizzas = document.getElementById('movingPizzas1');
+  for (var i = 0; i < pizzaNumber; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "dist/images/views/images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
