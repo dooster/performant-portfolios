@@ -505,18 +505,9 @@ function updatePositions() {
 //now the loop does not need to access the document.body's scrollTop attribute
 //on each item as it iterates through
 
-//this first loop replaces my old loop that had two variables
-//with the modulo in phase having a variable 'n' that cycled 0 to 4
-//code helped along by reviewer MarioNuevo
-
-  var phase = [];
-
-  for (var i = 0; i < 5; i++) {
-    phase.push(Math.sin(top / 1250 + i) * 100)
-  }
-
   for (i = 0; i < itemLength; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase[i % 5] + 'px';
+    var phase = Math.sin((top / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
 
