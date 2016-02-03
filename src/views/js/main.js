@@ -499,18 +499,24 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var top = document.body.scrollTop;
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   var itemLength = items.length;
 //added a variable top outside the loop
 //now the loop does not need to access the document.body's scrollTop attribute
 //on each item as it iterates through
 
-//the for loop counts two variables
-//i refers to each individual moving pizza item
-//and n runs on a shorter loop to provide the phase function with its modulo value
-  for (n = 0, i = 0; n < 5, i < itemLength; n++, i++) {
-    var phase = Math.sin((top / 1250) + (n % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+//this first loop replaces my old loop that had two variables
+//with the modulo in phase having a variable 'n' that cycled 0 to 4
+//code helped along by reviewer MarioNuevo
+
+  var phase = [];
+
+  for (var i = 0; i < 5; i++) {
+    phase.push(Math.sin(top / 1250 + i) * 100)
+  }
+
+  for (i = 0; i < itemLength; i++) {
+    items[i].style.left = items[i].basicLeft + 100 * phase[i % 5] + 'px';
   }
 
 
@@ -532,7 +538,7 @@ window.addEventListener('scroll', updatePositions);
 //were taken out of the for loop to speed the function
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
-  var rows = Math.round(window.innerHeight / 100); //Rows is calculated by dividing the screen's height by the pizza's height and then rounded to a full integer
+  var rows = Math.round(window.innerHeight / 256); //Rows is calculated by dividing the screen's height by 's' and then rounded to a full integer
   var pizzaNumber = rows * cols; //The number of pizzas to create is then created based on the number of Pizza rows and columns
   var s = 256;
   var elem;

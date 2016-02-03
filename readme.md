@@ -19,6 +19,12 @@ for both 'index.html' and 'pizza.html.'
 All the original files can be found at the 'src' directory. All the modified files are located in the 'dist' directory.
 Both HTML files point to the modified files in the 'dist' directory.
 
+###Gulp and Dependencies
+
+To run Gulp, it must be installed at the upper file level for the project. Once Gulp is installed, its various dependencies, indicated within the 'gulpfile' must also be installed locally at the project level. All required resources can be found marked as 'required' at the top of the 'gulpfile.'
+
+To run gulp, navigate to the project folder through the command line. Once at the project level, you can run the gulp build with the command `gulp critical`. This will delete all files in the 'dist' folder, except the cached optimized images. The gulp command will then minify CSS and JavaScript, optimize images on the first run, inline all critical CSS into index.html, and it will overwrite the current index.html with the latest version.
+
 ##Pizza Optimizations
 
 I made two main optimizations to have 'pizza.html' run faster.
